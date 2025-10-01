@@ -18,33 +18,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
             });
 
             Route::get('login', 'showLoginForm')->name('login');
-            Route::post('login', 'login')->name('admin.login.submit');
+            Route::post('login', 'login')->name('login.submit');
         });
 
         Route::controller(AdminForgotPasswordController::class)->group(function () {
-            Route::post('/password/email','sendResetLinkEmail')->name('admin.password.email');
-            Route::get('/password/reset','showLinkRequestForm')->name('admin.password.request');
+            Route::get('/password/reset','showLinkRequestForm')->name('password.request');
+            Route::post('/password/email','sendResetLinkEmail')->name('password.email');
         });
 
         Route::controller(AdminResetPasswordController::class)->group(function () {
-            Route::post('/password/reset','reset')->name('admin.password.update');
-            Route::get('/password/reset/{token}','showResetForm')->name('admin.password.reset');
+            Route::get('/password/reset/{token}','showResetForm')->name('password.reset');
+            Route::post('/password/reset','reset')->name('password.update');
         });
     });
 
     Route::middleware('admin.auth')->group(function () {
         Route::controller(DashboardController::class)->group(function () {
-            Route::get('dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
-            Route::get('admin-logout',[DashboardController::class,'logout'])->name('admin.logout');
+            Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+            Route::get('admin-logout',[DashboardController::class,'logout'])->name('logout');
 
-            Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+            Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
             Route::post('/profile',[ProfileController::class, 'update_profile']);
 
-            Route::get('/change-password', [ProfileController::class, 'change_password'])->name('admin.change-password');
+            Route::get('/change-password', [ProfileController::class, 'change_password'])->name('change-password');
             Route::post('/change-password',[ProfileController::class, 'update_change_password']);
 
-            // Cache clear route
-            Route::get('/cache-clear', [DashboardController::class, 'cacheClear'])->name('admin.cache.clear');
+            Route::get('/cache-clear', [DashboardController::class, 'cacheClear'])->name('cache.clear');
         });
     });    
 });

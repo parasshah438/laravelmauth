@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
-use Hash;
+
 
 class LoginController extends Controller
 {
@@ -29,17 +29,15 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {   
-     
+       
         $this->validate($request,
         [
             'email'=>'required',
             'password' => 'required',
-            'captcha' => 'required|captcha'
         ],
         [
             'email.required'=>'Email is required',
-            'password.required'=>'Password is required',
-            'captcha.captcha'=>'Invalid captcha code.'
+            'password.required'=>'Password is required'
         ]);
 
         $data = [
@@ -64,13 +62,12 @@ class LoginController extends Controller
                     'last_login_at' => Carbon::now(),
                     'last_login_ip' => $request->getClientIp()
                 ]);
-
-                return redirect('admin/dashboard')->with('success', 'You are successfully logged in'); 
+                return redirect()->route('admin.dashboard')->with('success', 'You are successfully logged in'); 
             }
         }
         else{
             $this->incrementLoginAttempts($request);
-            return redirect('admin')->with("error",'These credentials do not match our records.');
+            return redirect()->route('admin.login')->with("error",'These credentials do not match our records.');
         }
     }
 }
