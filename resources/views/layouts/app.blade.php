@@ -13,8 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6VZgQGA6h9gZQ1Q1ZtQTwF3e1hZl6tzt4t1Q5V5Q5Q5Q" crossorigin="anonymous">
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
@@ -76,7 +76,5 @@
             @yield('content')
         </main>
     </div>
-    <!-- Bootstrap 5 JS Bundle CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qQ1Q1ZtQTwF3e1hZl6tzt4t1Q5V5Q5Q5QENjdO4Dr2bkBIFxQpeoA6VZgQGA6h9gZ" crossorigin="anonymous"></script>
 </body>
 </html>

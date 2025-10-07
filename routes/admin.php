@@ -32,7 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-    Route::middleware('admin.auth')->group(function () {
+    Route::middleware(['admin.auth', 'single.session:admin'])->group(function () {
         Route::controller(DashboardController::class)->group(function () {
             Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
             Route::get('admin-logout',[DashboardController::class,'logout'])->name('logout');
